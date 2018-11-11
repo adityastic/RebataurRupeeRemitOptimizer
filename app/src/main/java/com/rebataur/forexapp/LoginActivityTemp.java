@@ -20,6 +20,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginActivityTemp extends AppCompatActivity {
+
+    boolean backPressed = true;
+    @Override
+    public void onBackPressed() {
+        if (backPressed) {
+            backPressed = false;
+            Toast.makeText(this, "Press Back Again to Exit..", Toast.LENGTH_SHORT).show();
+        } else
+            finishAffinity();
+    }
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
