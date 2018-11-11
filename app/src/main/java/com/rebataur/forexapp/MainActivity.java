@@ -9,11 +9,6 @@ import android.widget.*;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import com.rebataur.forexapp.adapters.CurrencyRecyclerAdapter;
-import com.rebataur.forexapp.algorithms.PerlinNoise;
-import com.rebataur.forexapp.data.CurrencyData;
 import com.rebataur.forexapp.data.GraphPlotData;
 import com.rebataur.forexapp.utils.AjaxCall;
 import com.rebataur.forexapp.utils.GraphUtil;
@@ -22,7 +17,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -33,10 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     Toolbar mToolbar;
     Spinner spinner;
-//
-//    RecyclerView mRecyclerView;
-//    CurrencyRecyclerAdapter mAdapter;
-
+    Spinner cuspinner;
 
     private final Handler mHandler = new Handler();
     private Runnable mTimer;
@@ -138,6 +129,60 @@ public class MainActivity extends AppCompatActivity {
             mHandler.removeCallbacks(mTimer);
     }
 
+    public void makeGraph(){
+        String window = (spinner.getSelectedItemPosition() == 0) ? "7" : (spinner.getSelectedItemPosition() == 1) ? "30" : "90";
+        String currency = (String) cuspinner.getSelectedItem();
+        block = true;
+
+        graph.reset();
+        graph.setVisibility(View.INVISIBLE);
+        pg.setVisibility(View.VISIBLE);
+
+        firstTimeGraph = true;
+
+        AjaxCall.sendUserConfig(currency, window, new AjaxCall.APICallback() {
+            @Override
+            public void apiSuccess(JSONObject jsonObject) {
+                if (jsonObject.has("code")) {
+                    try {
+                        if (jsonObject.getString("code").equals("S")) {
+                            AjaxCall.queryWindowCurrency(new AjaxCall.APICallback() {
+                                @Override
+                                public void apiSuccess(JSONObject jsonObject) {
+                                    try {
+                                        refreshGraph(jsonObject);
+                                    } catch (JSONException | ParseException e) {
+                                        Log.e("Failure", "in refreshQuery");
+                                        Toast.makeText(MainActivity.this, "Failure in refreshQuery..", Toast.LENGTH_SHORT).show();
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void apiFailure(Exception e) {
+                                    Log.e("Failure", "in queryCurrency");
+                                    Toast.makeText(MainActivity.this, "Failure in queryCurrency..", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(MainActivity.this, "Response Error in sendConfig...", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(MainActivity.this, "Failure in sendConfig..", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void apiFailure(Exception e) {
+                Log.e("Failure", "in sendConfig");
+                Toast.makeText(MainActivity.this, "Failure in sendConfig..", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    boolean firstSpin = true;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,11 +190,67 @@ public class MainActivity extends AppCompatActivity {
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         spinner = findViewById(R.id.spinnerSelect);
+        cuspinner = findViewById(R.id.spinnerLast);
 
         setUpToolbar();
 
         graph = findViewById(R.id.graph);
         pg = findViewById(R.id.pgbar);
+
+
+        ArrayList<String> curr = new ArrayList<>();
+        curr.add("USD");
+        curr.add("DKK");
+        curr.add("TRY");
+        curr.add("ISK");
+        curr.add("MXN");
+        curr.add("NZD");
+        curr.add("NOK");
+        curr.add("CZK");
+        curr.add("RUB");
+        curr.add("SEK");
+        curr.add("BRL");
+        curr.add("EUR");
+        curr.add("ZAR");
+        curr.add("JPY");
+        curr.add("IDR");
+        curr.add("CNY");
+        curr.add("INR");
+        curr.add("MYR");
+        curr.add("PLN");
+        curr.add("SGD");
+        curr.add("HRK");
+        curr.add("RON");
+        curr.add("ILS");
+        curr.add("KRW");
+        curr.add("AUD");
+        curr.add("BGN");
+        curr.add("HKD");
+        curr.add("THB");
+        curr.add("PHP");
+        curr.add("CHF");
+        curr.add("CAD");
+        curr.add("HUF");
+        curr.add("GBP");
+        Collections.sort(curr);
+        ArrayAdapter<String> adap = new ArrayAdapter<>(this, R.layout.spinner_item, curr);
+        adap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        cuspinner.setAdapter(adap);
+
+        cuspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!firstSpin) {
+                    makeGraph();
+                }else
+                    firstSpin = false;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         ArrayList<String> strs = new ArrayList<>();
         strs.add("Last Week");
@@ -159,55 +260,7 @@ public class MainActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String window = (position == 0) ? "7" : (position == 1) ? "30" : "90";
-                block = true;
-
-                graph.reset();
-                graph.setVisibility(View.INVISIBLE);
-                pg.setVisibility(View.VISIBLE);
-
-                firstTimeGraph = true;
-
-                AjaxCall.sendUserConfig("USD", window, new AjaxCall.APICallback() {
-                    @Override
-                    public void apiSuccess(JSONObject jsonObject) {
-                        if (jsonObject.has("code")) {
-                            try {
-                                if (jsonObject.getString("code").equals("S")) {
-                                    AjaxCall.queryWindowCurrency(new AjaxCall.APICallback() {
-                                        @Override
-                                        public void apiSuccess(JSONObject jsonObject) {
-                                            try {
-                                                refreshGraph(jsonObject);
-                                            } catch (JSONException | ParseException e) {
-                                                Log.e("Failure", "in refreshQuery");
-                                                Toast.makeText(MainActivity.this, "Failure in refreshQuery..", Toast.LENGTH_SHORT).show();
-                                                e.printStackTrace();
-                                            }
-                                        }
-
-                                        @Override
-                                        public void apiFailure(Exception e) {
-                                            Log.e("Failure", "in queryCurrency");
-                                            Toast.makeText(MainActivity.this, "Failure in queryCurrency..", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                                Toast.makeText(MainActivity.this, "Response Error in sendConfig...", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            Toast.makeText(MainActivity.this, "Failure in sendConfig..", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void apiFailure(Exception e) {
-                        Log.e("Failure", "in sendConfig");
-                        Toast.makeText(MainActivity.this, "Failure in sendConfig..", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                makeGraph();
             }
 
             @Override
@@ -236,7 +289,6 @@ public class MainActivity extends AppCompatActivity {
 
         list = new GraphUtil().graphMultiply(list);
 
-        Log.e("SIZE", list.size() + "");
         mSeries = new LineGraphSeries<>(this);
 
         double min, max;

@@ -16,8 +16,6 @@ public class GraphUtil {
         } else
             points = (int) Math.ceil((double) 90 / (list.size() - 1));
 
-        Log.e("Ceiling", points + "");
-
         ArrayList<GraphPlotData> listNew = new ArrayList<>();
 
         for (int i = 0; i < list.size() - 1; i++) {

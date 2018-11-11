@@ -11,15 +11,55 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <Spinner
-                android:id="@+id/spinnerSelect"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="5dp"
-                android:layout_weight="1"/>
+        <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                           xmlns:app="http://schemas.android.com/apk/res-auto"
+                                           xmlns:tools="http://schemas.android.com/tools"
+                                           android:layout_width="fill_parent"
+                                           android:layout_height="wrap_content"
+                                           app:cardElevation="2.0dip"
+                                           app:cardUseCompatPadding="true"
+                                           android:layout_marginTop="5dp"
+                                           android:layout_marginStart="10dp"
+                                           android:layout_marginEnd="10dp"
+                                           android:layout_marginBottom="5dp"
+                                           app:cardCornerRadius="10dp">
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp">
+
+                <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_arrows"/>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                    <customfonts.MyTextView_Poppins_SemiBold
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="INR"
+                            android:layout_weight="1"
+                            android:textSize="31.3sp"/>
+
+                    <Spinner
+                            android:id="@+id/spinnerLast"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"/>
+
+                </LinearLayout>
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
                 app:cardUseCompatPadding="true"
@@ -34,7 +74,7 @@
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="300dip">
+                    android:layout_height="wrap_content">
 
                 <ProgressBar android:layout_gravity="right" android:id="@+id/pgbar"
                              android:layout_marginRight="8dp"
@@ -42,9 +82,28 @@
 
                 <com.rebataur.forexapp.views.graph.GraphView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="300dip"
                         android:layout_margin="5dp"
                         android:id="@+id/graph"/>
+
+                <LinearLayout android:orientation="horizontal" android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                              android:text="Interval: " android:layout_gravity="center" android:layout_marginStart="16dp"/>
+
+                    <Spinner
+                            android:id="@+id/spinnerSelect"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
