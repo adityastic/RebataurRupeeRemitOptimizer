@@ -29,8 +29,17 @@ public class LocalStorage {
         prefs.edit().putString("user_id",userid).apply();
     }
 
+    public static String getCurrentCurrency(){
+        return prefs.getString("currency","");
+    }
+
+    public static void setCurrentCurrency(String currency){
+        prefs.edit().putString("currency",currency).apply();
+    }
+
     public static void resetToken(){
         prefs.edit().remove("token").apply();
         prefs.edit().remove("user_id").apply();
+        prefs.edit().remove("currency").apply();
     }
 }

@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.rebataur.forexapp.data.GraphPlotData;
 import com.rebataur.forexapp.utils.AjaxCall;
 import com.rebataur.forexapp.utils.GraphUtil;
+import com.rebataur.forexapp.utils.storage.LocalStorage;
 import com.rebataur.forexapp.views.graph.*;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -198,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
         pg = findViewById(R.id.pgbar);
 
 
-        ArrayList<String> curr = new ArrayList<>();
+        final ArrayList<String> curr = new ArrayList<>();
         curr.add("USD");
         curr.add("DKK");
         curr.add("TRY");
@@ -233,6 +234,12 @@ public class MainActivity extends AppCompatActivity {
         curr.add("HUF");
         curr.add("GBP");
         Collections.sort(curr);
+
+        if(!LocalStorage.getPrefs().getString("currency","hello").equals("hello")){
+           curr.remove(LocalStorage.getCurrentCurrency());
+           curr.add(0,LocalStorage.getCurrentCurrency());
+        }
+
         ArrayAdapter<String> adap = new ArrayAdapter<>(this, R.layout.spinner_item, curr);
         adap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cuspinner.setAdapter(adap);
@@ -244,6 +251,7 @@ public class MainActivity extends AppCompatActivity {
                     makeGraph();
                 }else
                     firstSpin = false;
+                LocalStorage.setCurrentCurrency(curr.get(position));
             }
 
             @Override
@@ -326,7 +334,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpToolbar() {
-        setTitle("Currency Info");
+        setTitle("Rupee Remit");
         setSupportActionBar(mToolbar);
     }
 }
