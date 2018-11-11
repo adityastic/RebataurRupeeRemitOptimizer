@@ -334,7 +334,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpToolbar() {
-        setTitle("Rupee Remit");
+        setTitle("₹ Remit Optimizer");
         setSupportActionBar(mToolbar);
     }
 }
