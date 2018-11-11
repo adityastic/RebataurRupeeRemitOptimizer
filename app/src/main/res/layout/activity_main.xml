@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                     xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                     xmlns:tools="http://schemas.android.com/tools"
+                                                     android:layout_width="match_parent"
+                                                     android:fitsSystemWindows="true"
+                                                     android:layout_height="match_parent"
+                                                     android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="com.rebataur.forexapp.behavior.AppBarLayoutBehavior"
+    >
+
+        <com.rebataur.forexapp.views.SansFontCollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
+                app:collapsedTitleTextAppearance="@style/CollapsedTitleAppearance"
+                app:expandedTitleGravity="top"
+                app:expandedTitleMarginStart="16dp"
+                app:expandedTitleMarginTop="48dp"
+                app:expandedTitleTextAppearance="@style/ExpandedTitleAppearance"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    style="@style/Toolbar48"
+                    app:elevation="2dp"
+                    app:layout_collapseMode="pin"/>
+
+        </com.rebataur.forexapp.views.SansFontCollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <include
+            layout="@layout/content_main"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

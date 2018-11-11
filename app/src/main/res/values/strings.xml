@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Rupee Remit Optimizer</string>
+
+    <string name="sans_bold" translatable="false">fonts/circular_std_black.otf</string>
+</resources>

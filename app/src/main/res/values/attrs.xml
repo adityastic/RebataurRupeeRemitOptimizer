@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="toolbarPopupTheme" format="reference" />
+    <declare-styleable name="CustomEntryEdittext">
+        <attr name="entryCount" format="integer" />
+    </declare-styleable>
+</resources>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/rounded_border"
+        android:elevation="2dp"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="ENTER OTP"
+            android:textColor="#333333"
+            android:textSize="17sp" />
+
+        <com.rebataur.forexapp.views.OTPEditText
+            android:id="@+id/custom_unique_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/txt_Subtitle"
+            android:layout_centerInParent="true"
+            android:layout_margin="30dp">
+
+        </com.rebataur.forexapp.views.OTPEditText>
+
+        <!--<android.support.v7.widget.AppCompatTextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:text="@string/password"-->
+        <!--android:textColor="?colorPrimaryDark"-->
+        <!--android:textSize="12sp" />-->
+
+        <!--<android.support.v7.widget.AppCompatEditText-->
+        <!--android:id="@+id/password"-->
+        <!--fontPath="fonts/GothamRoundedBold.ttf"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="30dp"-->
+        <!--android:imeActionId="@+id/otp"-->
+        <!--android:imeOptions="actionDone"-->
+        <!--android:inputType="textPassword"-->
+        <!--android:textColor="#6E6E6E"-->
+        <!--android:textSize="21sp"-->
+        <!--android:theme="@style/MyEditTextTheme"-->
+        <!--tools:ignore="InvalidImeActionId" />-->
+
+        <LinearLayout
+            android:id="@+id/resendlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Did not Recieve OTP Yet?"
+                android:textColor="#9e9e9e"
+                android:textSize="13sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:text="Send Again"
+                android:textColor="?colorPrimaryDark"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/check"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/rounded_button_border"
+            android:elevation="10dp"
+            android:text="CHECK"
+            android:textAllCaps="false"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

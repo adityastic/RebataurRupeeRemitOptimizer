@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#f2f2f3"
+              android:orientation="vertical"
+              tools:context=".LoginActivityTemp">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="212dp"
+                    android:layout_gravity="right"
+                    android:src="@drawable/hexagone1"/>
+
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="120dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/hexagone2"/>
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="36dp"
+                    android:layout_marginBottom="90dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingTop="125dp">
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="130dp"
+                        android:layout_height="wrap_content">
+
+
+                    <customfonts.MyTextView_Poppins_SemiBold
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:gravity="left|center"
+                            android:textFontWeight="1"
+                            android:text="RESET"
+                            android:textColor="#fefefe"
+                            android:id="@+id/resetHead"
+                            android:textSize="31.3sp"/>
+
+                    <androidx.viewpager.widget.ViewPager
+                            android:layout_below="@+id/resetHead"
+                            android:id="@+id/viewpager"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                    </androidx.viewpager.widget.ViewPager>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <FrameLayout
+                    android:layout_width="40.7dp"
+                    android:layout_height="45.3dp"
+                    android:id="@+id/buttonBack"
+                    android:layout_gravity="bottom|left"
+                    android:layout_marginLeft="27.3dp"
+                    android:layout_marginBottom="43.7dp"
+                    android:background="@drawable/white_hexagone">
+
+                <ImageView
+                        android:layout_width="18.7dp"
+                        android:layout_height="15.3dp"
+                        android:layout_gravity="center"
+                        android:rotation="180"
+                        android:src="@drawable/right_arrow"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                    android:layout_width="40.7dp"
+                    android:layout_height="45.3dp"
+                    android:id="@+id/buttonReg"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginRight="27.3dp"
+                    android:layout_marginBottom="43.7dp"
+                    android:background="@drawable/white_hexagone">
+
+                <ImageView
+                        android:layout_width="18.7dp"
+                        android:layout_height="15.3dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/right_arrow"/>
+
+            </FrameLayout>
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>
