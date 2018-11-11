@@ -27,7 +27,7 @@ public class GraphUtil {
             );
             temp.calculateSlope();
             temp.calculateIntercept();
-            listNew.addAll(temp.createPoints(points, list.get(i).getDate(), (i * points)+1));
+            listNew.addAll(temp.createPoints(points, list.get(i).getDate(), list.get(i+1).getDate(), (i * points)+1));
         }
 
 //        for (int i = 0; i < listNew.size(); i++) {
@@ -55,14 +55,14 @@ public class GraphUtil {
             intercept = y1 - (slope * x1);
         }
 
-        private ArrayList<GraphPlotData> createPoints(int points, Date d, int iStart) {
+        private ArrayList<GraphPlotData> createPoints(int points, Date fd,Date ed, int iStart) {
             ArrayList<GraphPlotData> list = new ArrayList<>();
             double unit = (x2 - x1) / points;
             for (int i = 0; i < points; i++) {
                 double valX = x1 + (unit * i);
                 double valY = (slope * valX) + intercept;
 
-                list.add(new GraphPlotData(d, valY, i + iStart));
+                list.add(new GraphPlotData((i == points -1)? ed : fd, valY, i + iStart));
             }
             return list;
         }
