@@ -4,9 +4,10 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
+import androidx.appcompat.widget.AppCompatTextView;
 
 
-public class MyTextView_Poppins_SemiBold extends TextView {
+public class MyTextView_Poppins_SemiBold extends AppCompatTextView {
 
     public MyTextView_Poppins_SemiBold(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);

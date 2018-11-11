@@ -42,20 +42,21 @@
                         android:orientation="horizontal"
                         android:padding="5dp">
 
+                    <Spinner
+                            android:id="@+id/spinnerLast"
+                            android:layout_width="match_parent"
+                            android:layout_marginEnd="12dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"/>
+
                     <customfonts.MyTextView_Poppins_SemiBold
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
                             android:gravity="center"
                             android:text="INR"
                             android:layout_weight="1"
                             android:textSize="31.3sp"/>
-
-                    <Spinner
-                            android:id="@+id/spinnerLast"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
-                            android:layout_weight="1"/>
 
                 </LinearLayout>
             </RelativeLayout>
@@ -76,9 +77,79 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                <ProgressBar android:layout_gravity="right" android:id="@+id/pgbar"
-                             android:layout_marginRight="8dp"
-                             android:layout_width="32dp" android:layout_height="wrap_content"/>
+                <RelativeLayout android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:orientation="horizontal"
+                                  android:id="@+id/calculations"
+                                  android:padding="5dp"
+                                  android:layout_height="wrap_content">
+                        <LinearLayout android:layout_width="match_parent"
+                                      android:layout_weight="1"
+                                      android:padding="5dp"
+                                      android:orientation="vertical"
+                                      android:layout_marginStart="15dp"
+                                      android:layout_height="wrap_content">
+                            <customfonts.MyTextView_Poppins_SemiBold android:ellipsize="end"
+                                                                     android:id="@+id/labeled_info_title"
+                                                                     android:text="$ 73.456"
+                                                                     android:textColor="#000000"
+                                                                     android:textSize="25sp"
+                                                                     android:layout_gravity="start|center"
+                                                                     android:layout_width="wrap_content"
+                                                                     android:layout_height="wrap_content"
+                                                                     android:maxLines="1" android:singleLine="true"
+                                                                     android:contentDescription="@null"
+                                                                     android:importantForAccessibility="no"/>
+                            <customfonts.MyTextView_Poppins_Regular android:ellipsize="end"
+                                                                    android:id="@+id/labeled_info_subtitle"
+                                                                    android:layout_width="wrap_content"
+                                                                    android:layout_height="wrap_content"
+                                                                    android:textColor="#757575"
+                                                                    android:layout_gravity="start|center"
+                                                                    android:maxLines="1" android:singleLine="true"
+                                                                    android:contentDescription="@null"
+                                                                    android:importantForAccessibility="no"
+                                                                    android:text="Peak ( Nov 10 )"/>
+                        </LinearLayout>
+
+                        <LinearLayout android:layout_width="match_parent"
+                                      android:layout_weight="1"
+                                      android:padding="5dp"
+                                      android:orientation="vertical"
+                                      android:layout_marginEnd="15dp"
+                                      android:layout_height="wrap_content">
+                            <customfonts.MyTextView_Poppins_SemiBold android:ellipsize="end"
+                                                                     android:layout_gravity="end|center"
+                                                                     android:id="@+id/labeled_info_title2"
+                                                                     android:text="+ 0.56%"
+                                                                     android:textColor="@color/colorAccent"
+                                                                     android:textSize="25sp"
+                                                                     android:layout_width="wrap_content"
+                                                                     android:layout_height="wrap_content"
+                                                                     android:maxLines="1" android:singleLine="true"
+                                                                     android:contentDescription="@null"
+                                                                     android:importantForAccessibility="no"/>
+                            <customfonts.MyTextView_Poppins_Regular android:ellipsize="end"
+                                                                    android:layout_gravity="end|center"
+                                                                    android:id="@+id/labeled_info_subtitle2"
+                                                                    android:layout_width="wrap_content"
+                                                                    android:layout_height="wrap_content"
+                                                                    android:maxLines="1" android:singleLine="true"
+                                                                    android:contentDescription="@null"
+                                                                    android:textColor="@color/colorAccentAlpha"
+                                                                    android:importantForAccessibility="no"
+                                                                    android:text="vs peak value"/>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <ProgressBar android:layout_alignParentRight="true" android:id="@+id/pgbar"
+                                 android:layout_marginRight="8dp"
+                                 android:layout_width="32dp" android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
 
                 <com.rebataur.forexapp.views.graph.GraphView
                         android:layout_width="match_parent"
@@ -88,10 +159,11 @@
 
                 <LinearLayout android:orientation="horizontal" android:layout_width="match_parent"
                               android:layout_height="wrap_content"
-                android:padding="10dp">
+                              android:padding="10dp">
 
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                              android:text="Interval: " android:layout_gravity="center" android:layout_marginStart="16dp"/>
+                              android:text="Interval: " android:layout_gravity="center"
+                              android:layout_marginStart="16dp"/>
 
                     <Spinner
                             android:id="@+id/spinnerSelect"

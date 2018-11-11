@@ -1,5 +1,6 @@
 package com.rebataur.forexapp;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.graphics.*;
@@ -11,11 +12,10 @@ import android.view.View;
 import android.widget.*;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationManagerCompat;
-import com.google.android.gms.common.internal.service.Common;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.rebataur.forexapp.data.GraphPlotData;
 import com.rebataur.forexapp.firebasemessaging.MyFirebaseMessagingService;
 import com.rebataur.forexapp.utils.AjaxCall;
@@ -46,7 +46,10 @@ public class MainActivity extends AppCompatActivity {
 
     GraphView graph;
     ProgressBar pg;
+    LinearLayout calc;
     boolean firstTimeGraph;
+
+    AppCompatTextView title1, subtitle1, title2, subtitle2;
 
     @Override
     public void onBackPressed() {
@@ -98,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
                             firstTimeGraph = false;
                             graph.setVisibility(View.VISIBLE);
                             pg.setVisibility(View.INVISIBLE);
+                            calc.setVisibility(View.VISIBLE);
                         }
                         if (index == list.size() - 1) {
                             onLast = true;
@@ -140,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
             mHandler.removeCallbacks(mTimer);
     }
 
-    public void makeGraph(){
+    public void makeGraph() {
         String window = (spinner.getSelectedItemPosition() == 0) ? "7" : (spinner.getSelectedItemPosition() == 1) ? "30" : "90";
         String currency = (String) cuspinner.getSelectedItem();
         block = true;
@@ -148,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
         graph.reset();
         graph.setVisibility(View.INVISIBLE);
         pg.setVisibility(View.VISIBLE);
+        calc.setVisibility(View.INVISIBLE);
 
         firstTimeGraph = true;
 
@@ -194,6 +199,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     boolean firstSpin = true;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -201,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
 
         createFirebaseMessagingInit();
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         spinner = findViewById(R.id.spinnerSelect);
         cuspinner = findViewById(R.id.spinnerLast);
 
@@ -209,10 +215,15 @@ public class MainActivity extends AppCompatActivity {
 
         graph = findViewById(R.id.graph);
         pg = findViewById(R.id.pgbar);
+        calc = findViewById(R.id.calculations);
+        title1 = findViewById(R.id.labeled_info_title);
+        title2 = findViewById(R.id.labeled_info_title2);
+        subtitle1 = findViewById(R.id.labeled_info_subtitle);
+        subtitle2 = findViewById(R.id.labeled_info_subtitle2);
 
+        createMap();
 
         final ArrayList<String> curr = new ArrayList<>();
-        curr.add("USD");
         curr.add("DKK");
         curr.add("TRY");
         curr.add("ISK");
@@ -223,12 +234,10 @@ public class MainActivity extends AppCompatActivity {
         curr.add("RUB");
         curr.add("SEK");
         curr.add("BRL");
-        curr.add("EUR");
         curr.add("ZAR");
         curr.add("JPY");
         curr.add("IDR");
         curr.add("CNY");
-        curr.add("INR");
         curr.add("MYR");
         curr.add("PLN");
         curr.add("SGD");
@@ -236,7 +245,6 @@ public class MainActivity extends AppCompatActivity {
         curr.add("RON");
         curr.add("ILS");
         curr.add("KRW");
-        curr.add("AUD");
         curr.add("BGN");
         curr.add("HKD");
         curr.add("THB");
@@ -244,24 +252,28 @@ public class MainActivity extends AppCompatActivity {
         curr.add("CHF");
         curr.add("CAD");
         curr.add("HUF");
-        curr.add("GBP");
         Collections.sort(curr);
+        curr.add(0, "USD");
+        curr.add(1, "EUR");
+        curr.add(2, "GBP");
+        curr.add(3, "AUD");
 
-        if(!LocalStorage.getPrefs().getString("currency","hello").equals("hello")){
-           curr.remove(LocalStorage.getCurrentCurrency());
-           curr.add(0,LocalStorage.getCurrentCurrency());
+        if (!LocalStorage.getPrefs().getString("currency", "hello").equals("hello")) {
+            curr.remove(LocalStorage.getCurrentCurrency());
+            curr.add(0, LocalStorage.getCurrentCurrency());
         }
 
         ArrayAdapter<String> adap = new ArrayAdapter<>(this, R.layout.spinner_item, curr);
         adap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cuspinner.setAdapter(adap);
+        cuspinner.setSelection(0);
 
         cuspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(!firstSpin) {
+                if (!firstSpin) {
                     makeGraph();
-                }else
+                } else
                     firstSpin = false;
                 LocalStorage.setCurrentCurrency(curr.get(position));
             }
@@ -290,8 +302,48 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    Map<String, String> curList;
+
+    private void createMap() {
+        curList = new HashMap<>();
+        curList.put("DKK", "kr");
+        curList.put("TRY", "₺");
+        curList.put("ISK", "kr");
+        curList.put("MXN", "$");
+        curList.put("NZD", "$");
+        curList.put("NOK", "kr");
+        curList.put("CZK", "Kč");
+        curList.put("RUB", "Br");
+        curList.put("SEK", "kr");
+        curList.put("BRL", "R$");
+        curList.put("ZAR", "R");
+        curList.put("JPY", "¥");
+        curList.put("IDR", "Rp");
+        curList.put("CNY", "¥");
+        curList.put("MYR", "RM");
+        curList.put("PLN", "zł");
+        curList.put("SGD", "$");
+        curList.put("HRK", "kn");
+        curList.put("RON", "lei");
+        curList.put("ILS", "₪");
+        curList.put("KRW", "₩");
+        curList.put("BGN", "лв");
+        curList.put("HKD", "$");
+        curList.put("THB", "฿");
+        curList.put("PHP", "₱");
+        curList.put("CHF", "CHF");
+        curList.put("CAD", "CAD");
+        curList.put("HUF", "Ft");
+        curList.put("USD", "$");
+        curList.put("EUR", "€");
+        curList.put("GBP", "£");
+        curList.put("AUD", "$");
+    }
+
+
     ArrayList<GraphPlotData> list;
 
+    @SuppressLint("SetTextI18n")
     public void refreshGraph(JSONObject json) throws JSONException, ParseException {
         list = new ArrayList<>();
 
@@ -312,11 +364,15 @@ public class MainActivity extends AppCompatActivity {
         mSeries = new LineGraphSeries<>(this);
 
         double min, max;
+        Date peak = list.get(0).getDate();
         min = list.get(0).getCurrency();
         max = list.get(0).getCurrency();
         for (int i = 0; i < list.size(); i++) {
             min = (list.get(i).getCurrency() < min) ? list.get(i).getCurrency() : min;
-            max = (list.get(i).getCurrency() > max) ? list.get(i).getCurrency() : max;
+            if(list.get(i).getCurrency() > max){
+                max = list.get(i).getCurrency();
+                peak = list.get(i).getDate();
+            }
         }
 
         initGraph(graph);
@@ -342,6 +398,13 @@ public class MainActivity extends AppCompatActivity {
         graph.getViewport().setMinY(min - 0.5);
 
         block = false;
+
+        title1.setText(curList.get(cuspinner.getSelectedItem()) + " " + String.format("%.3f",list.get(list.size()-1).getCurrency()));
+        subtitle1.setText("Peak ( "+new SimpleDateFormat("MMM dd").format(peak)+" )");
+
+        double perc = ((list.get(list.size()-1).getCurrency() - max)/max) * 100;
+        title2.setText(String.format("%.3f",perc)+" %");
+
         resumeGraph();
     }
 
@@ -353,8 +416,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void apiSuccess(JSONObject jsonObject) {
                 try {
-                    if(jsonObject.has("code") && jsonObject.getString("code").equals("S"))
-                    {
+                    if (jsonObject.has("code") && jsonObject.getString("code").equals("S")) {
                         MyFirebaseMessagingService.notificationManager = NotificationManagerCompat.from(MainActivity.this);
                         createNotificationChannels();
                     }
