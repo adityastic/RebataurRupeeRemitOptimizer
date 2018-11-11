@@ -30,6 +30,8 @@
                 android:name=".LoginActivityTemp"
                 android:label="@string/app_name"
                 android:theme="@style/LoginTheme">
+        </activity>
+        <activity android:name=".Splashscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
