@@ -130,7 +130,7 @@ public class AjaxCall {
         }
     }
 
-    public static void resetConfirmed(String email,String newPass, int token, APICallback callback) {
+    public static void resetConfirmed(String email, String newPass, int token, APICallback callback) {
 
         JSONObject jsonObject = new JSONObject();
         try {
@@ -200,7 +200,7 @@ public class AjaxCall {
         }
     }
 
-    public static void sendUserConfig(String currency,String window, APICallback callback){
+    public static void sendUserConfig(String currency, String window, APICallback callback) {
         JSONObject userConfig = new JSONObject();
         try {
             userConfig.put("event_name", "store_user_config");
@@ -231,6 +231,25 @@ public class AjaxCall {
 
             JSONObject payload = new JSONObject();
             payload.put("user_id", LocalStorage.getUserID());
+            getAll.put("payload", payload);
+
+            invokeAPI(AjaxCall.EVENT, getAll, callback);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            callback.apiFailure(e);
+        }
+    }
+
+    public static void storeFCMToken(String token, APICallback callback) {
+        JSONObject getAll = new JSONObject();
+        try {
+            getAll.put("event_name", "store_fcm_token");
+            getAll.put("event_type", "command");
+            getAll.put("version", 1);
+
+            JSONObject payload = new JSONObject();
+            payload.put("user_id", LocalStorage.getUserID());
+            payload.put("fcm_token", token);
             getAll.put("payload", payload);
 
             invokeAPI(AjaxCall.EVENT, getAll, callback);

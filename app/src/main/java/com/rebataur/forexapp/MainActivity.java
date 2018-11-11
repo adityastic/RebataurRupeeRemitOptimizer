@@ -1,6 +1,9 @@
 package com.rebataur.forexapp;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.graphics.*;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -9,7 +12,12 @@ import android.widget.*;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationManagerCompat;
+import com.google.android.gms.common.internal.service.Common;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.rebataur.forexapp.data.GraphPlotData;
+import com.rebataur.forexapp.firebasemessaging.MyFirebaseMessagingService;
 import com.rebataur.forexapp.utils.AjaxCall;
 import com.rebataur.forexapp.utils.GraphUtil;
 import com.rebataur.forexapp.utils.storage.LocalStorage;
@@ -21,6 +29,8 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static com.rebataur.forexapp.firebasemessaging.MyFirebaseMessagingService.CHANNEL_1_ID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -189,6 +199,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        createFirebaseMessagingInit();
+
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         spinner = findViewById(R.id.spinnerSelect);
         cuspinner = findViewById(R.id.spinnerLast);
@@ -331,6 +343,47 @@ public class MainActivity extends AppCompatActivity {
 
         block = false;
         resumeGraph();
+    }
+
+    private void createFirebaseMessagingInit() {
+        String token = FirebaseInstanceId.getInstance().getToken();
+        Log.e("Token", "Token: " + token);
+
+        AjaxCall.storeFCMToken(token, new AjaxCall.APICallback() {
+            @Override
+            public void apiSuccess(JSONObject jsonObject) {
+                try {
+                    if(jsonObject.has("code") && jsonObject.getString("code").equals("S"))
+                    {
+                        MyFirebaseMessagingService.notificationManager = NotificationManagerCompat.from(MainActivity.this);
+                        createNotificationChannels();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void apiFailure(Exception e) {
+                Toast.makeText(MainActivity.this, "FCM Issue...", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+//        FirebaseMessaging.getInstance().subscribeToTopic("garudaNotifications");
+    }
+
+    private void createNotificationChannels() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel1 = new NotificationChannel(
+                    CHANNEL_1_ID,
+                    "Rupee Remit Optimizer",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            channel1.setDescription("This is Rupee Remit Channel");
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel1);
+        }
     }
 
     private void setUpToolbar() {

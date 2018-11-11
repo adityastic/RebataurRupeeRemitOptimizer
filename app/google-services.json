@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "492786537412",
+    "firebase_url": "https://forexapp-bb241.firebaseio.com",
+    "project_id": "forexapp-bb241",
+    "storage_bucket": "forexapp-bb241.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492786537412:android:2eff25ff51bbd872",
+        "android_client_info": {
+          "package_name": "com.rebataur.forexapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "492786537412-h3e8cgjar0loivfo4q8mnbtv7t6apjlq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rebataur.forexapp",
+            "certificate_hash": "babde9e70e0181acf322d561bd5fe68a2dc5edfc"
+          }
+        },
+        {
+          "client_id": "492786537412-aeie0m9em92b8l5lho0tj9i3v3lg98e1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt4x1UKDLFBMeyKcPkoeljeke5KUZ3S80"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "492786537412-aeie0m9em92b8l5lho0tj9i3v3lg98e1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
