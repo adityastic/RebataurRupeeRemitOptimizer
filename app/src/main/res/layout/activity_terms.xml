@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#f2f2f3"
+              android:orientation="vertical"
+              tools:context=".LoginActivityTemp">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <ImageView
+                    android:layout_width="140dp"
+                    android:layout_height="212dp"
+                    android:layout_gravity="right"
+                    android:src="@drawable/hexagone1"/>
+
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="120dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/hexagone2"/>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="90dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingTop="72dp">
+
+                <androidx.cardview.widget.CardView android:layout_width="match_parent"
+                                                   app:cardUseCompatPadding="true"
+                                                   app:cardCornerRadius="10dp"
+                                                   android:layout_margin="15dp"
+                                                   android:layout_height="match_parent">
+
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:layout_margin="5dp"
+                                  android:orientation="vertical"
+                                  android:layout_height="match_parent">
+
+                        <customfonts.MyTextView_Poppins_SemiBold
+                                android:padding="10dp"
+                                android:layout_width="wrap_content"
+                                android:textSize="25sp"
+                                android:layout_height="wrap_content"
+                                android:text="Terms and Conditions"
+                        />
+                        <View android:layout_width="match_parent" android:layout_height="2dp"
+                              android:background="@color/bgoff" android:layout_margin="5dp"/>
+
+                        <customfonts.MyTextView_Poppins_Regular
+                                android:padding="10dp"
+                                android:layout_width="wrap_content"
+                                android:textSize="13sp"
+                                android:layout_height="wrap_content"
+                                android:text="To use Rupee Remit Optimzer, agree to the Terms of Service and Privacy Policy."
+                        />
+
+                        <LinearLayout android:layout_width="match_parent"
+                                      android:orientation="horizontal"
+                                      android:layout_height="wrap_content">
+                            <CheckBox android:layout_width="wrap_content"
+                                      android:layout_gravity="center"
+                                      android:id="@+id/termscheck"
+                                      android:layout_height="wrap_content"/>
+                            <customfonts.MyTextView_Poppins_SemiBold
+                                    android:padding="5dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_gravity="center"
+                                    android:id="@+id/termstext"
+                                    android:text="Terms of Service"
+                                    android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                        <LinearLayout android:layout_width="match_parent"
+                                      android:orientation="horizontal"
+                                      android:layout_height="wrap_content">
+                            <CheckBox android:layout_width="wrap_content"
+                                      android:id="@+id/policheck"
+                                      android:layout_gravity="center"
+                                      android:layout_height="wrap_content"/>
+                            <customfonts.MyTextView_Poppins_SemiBold
+                                    android:padding="5dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_gravity="center"
+                                    android:id="@+id/policytext"
+                                    android:text="Privacy Policies"
+                                    android:layout_height="wrap_content"/>
+                        </LinearLayout>
+
+
+                        <RelativeLayout android:layout_width="match_parent"
+                                        android:layout_marginBottom="15dp"
+                                        android:layout_height="wrap_content">
+
+                            <View android:layout_width="match_parent" android:layout_height="2dp"
+                                  android:background="@color/bgoff" android:layout_marginTop="15dp"
+                                  android:layout_marginEnd="10dp"
+                                  android:layout_marginStart="10dp"
+                                  android:layout_above="@id/agreeallLayout"
+                                  android:layout_marginBottom="10dp"/>
+
+                            <LinearLayout android:layout_width="match_parent"
+                                          android:orientation="horizontal"
+                                          android:id="@+id/agreeallLayout"
+                                          android:layout_alignParentBottom="true"
+                                          android:layout_height="wrap_content">
+                                <CheckBox android:layout_width="wrap_content"
+                                          android:id="@+id/allcheck"
+                                          android:layout_gravity="center"
+                                          android:layout_height="wrap_content"/>
+                                <customfonts.MyTextView_Poppins_SemiBold
+                                        android:padding="5dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_gravity="center"
+                                        android:text="I've read and agreed to all of the above."
+                                        android:layout_height="wrap_content"/>
+                            </LinearLayout>
+                        </RelativeLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+
+            <FrameLayout
+                    android:layout_width="40.7dp"
+                    android:layout_height="45.3dp"
+                    android:id="@+id/buttonBack"
+                    android:layout_gravity="bottom|left"
+                    android:layout_marginLeft="27.3dp"
+                    android:layout_marginBottom="43.7dp"
+                    android:background="@drawable/white_hexagone">
+
+                <ImageView
+                        android:layout_width="18.7dp"
+                        android:layout_height="15.3dp"
+                        android:layout_gravity="center"
+                        android:rotation="180"
+                        android:src="@drawable/right_arrow"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                    android:layout_width="40.7dp"
+                    android:layout_height="45.3dp"
+                    android:id="@+id/buttonReg"
+                    android:layout_gravity="bottom|right"
+                    android:layout_marginRight="27.3dp"
+                    android:layout_marginBottom="43.7dp"
+                    android:background="@drawable/white_hexagone">
+
+                <ImageView
+                        android:layout_width="18.7dp"
+                        android:layout_height="15.3dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/right_arrow"/>
+
+            </FrameLayout>
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>

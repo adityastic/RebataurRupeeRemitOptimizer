@@ -22,6 +22,7 @@ import java.util.Map;
 public class LoginActivityTemp extends AppCompatActivity {
 
     boolean backPressed = true;
+
     @Override
     public void onBackPressed() {
         if (backPressed) {
@@ -56,13 +57,15 @@ public class LoginActivityTemp extends AppCompatActivity {
                             public void apiSuccess(JSONObject jsonObject) {
                                 if (jsonObject.has("user_id")) {
                                     try {
-                                        LocalStorage.setUserID(jsonObject.getString("user_id"));
-                                        LocalStorage.setToken(jsonObject.getString("token"));
+
+                                        Intent intent = new Intent(LoginActivityTemp.this, TermsActivityTemp.class);
+                                        intent.putExtra("user_id", jsonObject.getString("user_id"));
+                                        intent.putExtra("token", jsonObject.getString("token"));
+                                        startActivity(intent);
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
-                                    startActivity(new Intent(LoginActivityTemp.this, MainActivity.class));
                                 } else {
                                     Toast.makeText(LoginActivityTemp.this, "Enter Correct Login ID / Password", Toast.LENGTH_SHORT).show();
                                 }
