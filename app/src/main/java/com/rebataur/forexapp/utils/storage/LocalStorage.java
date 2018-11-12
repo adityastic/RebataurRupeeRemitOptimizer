@@ -37,9 +37,18 @@ public class LocalStorage {
         prefs.edit().putString("currency",currency).apply();
     }
 
+    public static String getWindow(){
+        return prefs.getString("window","");
+    }
+
+    public static void setWindow(String window){
+        prefs.edit().putString("window",window).apply();
+    }
+
     public static void resetToken(){
         prefs.edit().remove("token").apply();
         prefs.edit().remove("user_id").apply();
         prefs.edit().remove("currency").apply();
+        prefs.edit().remove("window").apply();
     }
 }

@@ -46,7 +46,7 @@
                             android:id="@+id/spinnerLast"
                             android:layout_width="match_parent"
                             android:layout_marginEnd="12dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"/>
 
                     <customfonts.MyTextView_Poppins_SemiBold
@@ -162,7 +162,9 @@
                               android:padding="10dp">
 
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                              android:text="Interval: " android:layout_gravity="center"
+                              android:text="Peak Alert : "
+                              android:textColor="#313131"
+                              android:layout_gravity="center"
                               android:layout_marginStart="16dp"/>
 
                     <Spinner
@@ -176,57 +178,24 @@
                             android:layout_weight="1"/>
 
                 </LinearLayout>
-
+                <LinearLayout
+                        android:layout_width="match_parent" android:orientation="horizontal"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginEnd="16dp">
+                    <ImageView
+                            android:src="@drawable/info"
+                            android:tint="#757575"
+                            android:layout_width="24dp" android:layout_height="24dp"/>
+                    <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_marginStart="8dp"
+                            android:layout_height="wrap_content"
+                            android:text="Get notified when currency peaks for this peroid"/>
+                </LinearLayout>
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
-
-        <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--android:id="@+id/OCRFragment"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:orientation="vertical"-->
-        <!--android:visibility="visible">-->
-
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal">-->
-
-        <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="40dp"-->
-        <!--android:layout_weight="2"-->
-        <!--android:text="Select        Base" />-->
-
-        <!--<Spinner-->
-        <!--android:id="@+id/spinnerSelect"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_margin="10dp"-->
-        <!--android:layout_weight="1" />-->
-        <!--</LinearLayout>-->
-
-        <!--<LinearLayout-->
-        <!--android:id="@+id/resultLayout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="vertical">-->
-
-        <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_margin="20dp"-->
-        <!--android:text="Result" />-->
-
-        <!--<androidx.recyclerview.widget.RecyclerView-->
-        <!--android:id="@+id/resultRecyc"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-
-        <!--</androidx.recyclerview.widget.RecyclerView>-->
-        <!--</LinearLayout>-->
-        <!--</LinearLayout>-->
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -198,8 +198,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    boolean firstSpin = true;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -258,23 +256,17 @@ public class MainActivity extends AppCompatActivity {
         curr.add(2, "GBP");
         curr.add(3, "AUD");
 
-        if (!LocalStorage.getPrefs().getString("currency", "hello").equals("hello")) {
-            curr.remove(LocalStorage.getCurrentCurrency());
-            curr.add(0, LocalStorage.getCurrentCurrency());
-        }
-
         ArrayAdapter<String> adap = new ArrayAdapter<>(this, R.layout.spinner_item, curr);
         adap.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cuspinner.setAdapter(adap);
-        cuspinner.setSelection(0);
 
+        if (!LocalStorage.getPrefs().getString("currency", "hello").equals("hello")) {
+            cuspinner.setSelection(curr.indexOf(LocalStorage.getCurrentCurrency()), false);
+        }
         cuspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (!firstSpin) {
-                    makeGraph();
-                } else
-                    firstSpin = false;
+                makeGraph();
                 LocalStorage.setCurrentCurrency(curr.get(position));
             }
 
@@ -284,15 +276,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ArrayList<String> strs = new ArrayList<>();
+        final ArrayList<String> strs = new ArrayList<>();
         strs.add("Last Week");
         strs.add("Last Month");
         strs.add("Last Quater");
         spinner.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, strs));
+
+        if (!LocalStorage.getPrefs().getString("window", "hello").equals("hello")) {
+            spinner.setSelection(strs.indexOf(LocalStorage.getWindow()), false);
+        }
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 makeGraph();
+                LocalStorage.setWindow(strs.get(position));
             }
 
             @Override
@@ -300,6 +298,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        makeGraph();
     }
 
     Map<String, String> curList;
@@ -364,15 +363,11 @@ public class MainActivity extends AppCompatActivity {
         mSeries = new LineGraphSeries<>(this);
 
         double min, max;
-        Date peak = list.get(0).getDate();
         min = list.get(0).getCurrency();
         max = list.get(0).getCurrency();
         for (int i = 0; i < list.size(); i++) {
             min = (list.get(i).getCurrency() < min) ? list.get(i).getCurrency() : min;
-            if(list.get(i).getCurrency() > max){
-                max = list.get(i).getCurrency();
-                peak = list.get(i).getDate();
-            }
+            max = (list.get(i).getCurrency() > max) ? list.get(i).getCurrency() : max;
         }
 
         initGraph(graph);
@@ -399,11 +394,11 @@ public class MainActivity extends AppCompatActivity {
 
         block = false;
 
-        title1.setText(curList.get(cuspinner.getSelectedItem()) + " " + String.format("%.3f",list.get(list.size()-1).getCurrency()));
-        subtitle1.setText("Peak ( "+new SimpleDateFormat("MMM dd").format(peak)+" )");
+        title1.setText(curList.get(cuspinner.getSelectedItem()) + " " + String.format("%.3f", list.get(list.size() - 1).getCurrency()));
+        subtitle1.setText(new SimpleDateFormat("MMM dd").format(list.get(list.size() - 1).getDate()));
 
-        double perc = ((list.get(list.size()-1).getCurrency() - max)/max) * 100;
-        title2.setText(String.format("%.3f",perc)+" %");
+        double perc = ((list.get(list.size() - 1).getCurrency() - max) / max) * 100;
+        title2.setText(String.format("%.3f", perc) + " %");
 
         resumeGraph();
     }
