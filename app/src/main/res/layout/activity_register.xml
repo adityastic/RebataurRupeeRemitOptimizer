@@ -6,7 +6,7 @@
               android:layout_height="match_parent"
               android:background="#f2f2f3"
               android:orientation="vertical"
-              tools:context=".LoginActivityTemp">
+              tools:context=".ui.activities.RegisterActivity">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -37,120 +37,127 @@
                     android:layout_marginLeft="36dp"
                     android:layout_marginBottom="90dp"
                     android:gravity="center"
-                    android:orientation="vertical"
-                    android:paddingTop="125dp">
+                    android:orientation="vertical">
+                <ScrollView android:layout_width="wrap_content" android:layout_height="match_parent">
+                    <LinearLayout android:layout_width="wrap_content"
+                                  android:orientation="vertical"
+                                  android:paddingTop="180dp"
+                                  android:layout_height="match_parent">
 
 
-                <customfonts.MyTextView_Poppins_SemiBold
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:gravity="left"
-                        android:text="REGISTER"
-                        android:textColor="#fefefe"
-                        android:textSize="31.3sp"/>
+                        <customfonts.MyTextView_Poppins_SemiBold
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="left"
+                                android:gravity="left"
+                                android:text="REGISTER"
+                                android:textColor="#fefefe"
+                                android:textSize="31.3sp"/>
 
-                <customfonts.MyTextView_Poppins_Regular
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginTop="52.7dp"
-                        android:text="Email"
-                        android:textColor="#fefefe"
-                        android:textSize="13.3sp"/>
+                        <customfonts.MyTextView_Poppins_Regular
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="left"
+                                android:layout_marginTop="52.7dp"
+                                android:text="Email"
+                                android:textColor="#fefefe"
+                                android:textSize="13.3sp"/>
 
-                <customfonts.EditText_Poppins_Semi_Bold
-                        android:id="@+id/textEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginTop="18dp"
-                        android:background="@android:color/transparent"
-                        android:inputType="textEmailAddress"
-                        android:maxLines="1"
-                        android:textColor="#FFFFFF"
-                        android:textColorHint="#FFFFFF"
-                        android:textCursorDrawable="@drawable/white_cursor_color"
-                        android:textSize="15sp"/>
+                        <customfonts.EditText_Poppins_Semi_Bold
+                                android:id="@+id/textEmail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="left"
+                                android:layout_marginTop="18dp"
+                                android:background="@android:color/transparent"
+                                android:inputType="textEmailAddress"
+                                android:maxLines="1"
+                                android:textColor="#FFFFFF"
+                                android:textColorHint="#FFFFFF"
+                                android:textCursorDrawable="@drawable/white_cursor_color"
+                                android:textSize="15sp"/>
 
-                <View
-                        android:layout_width="263.7dp"
-                        android:layout_height="1dp"
-                        android:layout_gravity="left"
-                        android:layout_marginTop="6.3dp"
-                        android:background="#f2f2f3"/>
-
-
-                <customfonts.MyTextView_Poppins_Regular
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginTop="52.7dp"
-                        android:text="Username"
-                        android:textColor="#fefefe"
-                        android:textSize="13.3sp"/>
-
-                <customfonts.EditText_Poppins_Semi_Bold
-                        android:id="@+id/textusername"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginTop="18dp"
-                        android:background="@android:color/transparent"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:textColor="#FFFFFF"
-                        android:textColorHint="#FFFFFF"
-                        android:textCursorDrawable="@drawable/white_cursor_color"
-                        android:textSize="15sp"/>
-
-                <View
-                        android:layout_width="263.7dp"
-                        android:layout_height="1dp"
-                        android:layout_gravity="left"
-                        android:layout_marginTop="6.3dp"
-                        android:background="#f2f2f3"/>
+                        <View
+                                android:layout_width="263.7dp"
+                                android:layout_height="1dp"
+                                android:layout_gravity="left"
+                                android:layout_marginTop="6.3dp"
+                                android:background="#f2f2f3"/>
 
 
-                <customfonts.MyTextView_Poppins_Regular
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginTop="37.3dp"
-                        android:text="Password"
-                        android:textColor="#fefefe"
-                        android:textSize="13.3sp"/>
+                        <customfonts.MyTextView_Poppins_Regular
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="left"
+                                android:layout_marginTop="52.7dp"
+                                android:text="Username"
+                                android:textColor="#fefefe"
+                                android:textSize="13.3sp"/>
 
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="18dp"
-                        android:orientation="horizontal">
+                        <customfonts.EditText_Poppins_Semi_Bold
+                                android:id="@+id/textusername"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="left"
+                                android:layout_marginTop="18dp"
+                                android:background="@android:color/transparent"
+                                android:inputType="text"
+                                android:maxLines="1"
+                                android:textColor="#FFFFFF"
+                                android:textColorHint="#FFFFFF"
+                                android:textCursorDrawable="@drawable/white_cursor_color"
+                                android:textSize="15sp"/>
 
-                    <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
-                            android:id="@+id/password"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@android:color/transparent"
-                            android:inputType="textPassword"
-                            android:maxLength="10"
-                            android:maxLines="1"
-                            android:textColor="#FFFFFF"
-                            android:textColorHint="#ffffff"
-                            android:textCursorDrawable="@drawable/white_cursor_color"
-                            android:textSize="15sp"
-                            app:drawable_hide="@drawable/hide1"
-                            app:drawable_show="@drawable/show"
-                            app:tint_color="#FFFFFF"/>
+                        <View
+                                android:layout_width="263.7dp"
+                                android:layout_height="1dp"
+                                android:layout_gravity="left"
+                                android:layout_marginTop="6.3dp"
+                                android:background="#f2f2f3"/>
 
-                </LinearLayout>
 
-                <View
-                        android:layout_width="263.7dp"
-                        android:layout_height="1dp"
-                        android:layout_gravity="left"
-                        android:layout_marginTop="6.3dp"
-                        android:background="#f2f2f3"/>
+                        <customfonts.MyTextView_Poppins_Regular
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="left"
+                                android:layout_marginTop="37.3dp"
+                                android:text="Password"
+                                android:textColor="#fefefe"
+                                android:textSize="13.3sp"/>
+
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="18dp"
+                                android:orientation="horizontal">
+
+                            <com.scottyab.showhidepasswordedittext.ShowHidePasswordEditText
+                                    android:id="@+id/password"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@android:color/transparent"
+                                    android:inputType="textPassword"
+                                    android:maxLength="10"
+                                    android:maxLines="1"
+                                    android:textColor="#FFFFFF"
+                                    android:textColorHint="#ffffff"
+                                    android:textCursorDrawable="@drawable/white_cursor_color"
+                                    android:textSize="15sp"
+                                    app:drawable_hide="@drawable/hide1"
+                                    app:drawable_show="@drawable/show"
+                                    app:tint_color="#FFFFFF"/>
+
+                        </LinearLayout>
+
+                        <View
+                                android:layout_width="263.7dp"
+                                android:layout_height="1dp"
+                                android:layout_gravity="left"
+                                android:layout_marginTop="6.3dp"
+                                android:background="#f2f2f3"/>
+
+                    </LinearLayout>
+                </ScrollView>
 
             </LinearLayout>
 

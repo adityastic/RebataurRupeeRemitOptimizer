@@ -117,8 +117,8 @@ public class RegisterActivityTemp extends AppCompatActivity {
                                         Toast.makeText(RegisterActivityTemp.this, "User Already Exists, Use another username", Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                                e.printStackTrace();
+                            }
                             }
 
                             @Override

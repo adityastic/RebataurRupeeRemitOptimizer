@@ -16,36 +16,36 @@ import java.util.Set;
 
 
 public abstract class BaseSeries<E extends DataPointInterface> implements Series<E> {
-    
+
     final private List<E> mData = new ArrayList<E>();
 
-    
+
     private Map<PointF, E> mDataPoints = new HashMap<PointF, E>();
 
-    
+
     private String mTitle;
 
-    
+
     private int mColor = 0xff0077cc;
 
-    
+
     private double mLowestYCache = Double.NaN;
 
-    
+
     private double mHighestYCache = Double.NaN;
 
-    
+
     protected OnDataPointTapListener mOnDataPointTapListener;
 
-    
+
     private List<WeakReference<GraphView>> mGraphViews;
 
-    
+
     public BaseSeries() {
         mGraphViews = new ArrayList<>();
     }
 
-    
+
     public BaseSeries(E[] data) {
         mGraphViews = new ArrayList<>();
         for (E d : data) {
@@ -54,19 +54,19 @@ public abstract class BaseSeries<E extends DataPointInterface> implements Series
         checkValueOrder(null);
     }
 
-    
+
     public double getLowestValueX() {
         if (mData.isEmpty()) return 0d;
         return mData.get(0).getX();
     }
 
-    
+
     public double getHighestValueX() {
         if (mData.isEmpty()) return 0d;
-        return mData.get(mData.size()-1).getX();
+        return mData.get(mData.size() - 1).getX();
     }
 
-    
+
     public double getLowestValueY() {
         if (mData.isEmpty()) return 0d;
         if (!Double.isNaN(mLowestYCache)) {
@@ -82,7 +82,7 @@ public abstract class BaseSeries<E extends DataPointInterface> implements Series
         return mLowestYCache = l;
     }
 
-    
+
     public double getHighestValueY() {
         if (mData.isEmpty()) return 0d;
         if (!Double.isNaN(mHighestYCache)) {
@@ -98,106 +98,105 @@ public abstract class BaseSeries<E extends DataPointInterface> implements Series
         return mHighestYCache = h;
     }
 
-    
+
     @Override
     public Iterator<E> getValues(final double from, final double until) {
+        if (from <= getLowestValueX() && until >= getHighestValueX()) {
+            Log.e("Default", "YES");
             return mData.iterator();
-//        if (from <= getLowestValueX() && until >= getHighestValueX()) {
-//            Log.e("Default","YES");
-//            return mData.iterator();
-//        } else {
-//            return new Iterator<E>() {
-//                Iterator<E> org = mData.iterator();
-//                E nextValue = null;
-//                E nextNextValue = null;
-//                boolean plusOne = true;
-//
-//                {
-//                    // go to first
-//                    boolean found = false;
-//                    E prevValue = null;
-//                    if (org.hasNext()) {
-//                        prevValue = org.next();
-//                    }
-//                    if (prevValue != null) {
-//                        if (prevValue.getX() >= from) {
-//                            nextValue = prevValue;
-//                            found = true;
-//                        } else {
-//                            while (org.hasNext()) {
-//                                nextValue = org.next();
-//                                if (nextValue.getX() >= from) {
-//                                    found = true;
-//                                    nextNextValue = nextValue;
-//                                    nextValue = prevValue;
-//                                    break;
-//                                }
-//                                prevValue = nextValue;
-//                            }
-//                        }
-//                    }
-//                    if (!found) {
-//                        nextValue = null;
-//                    }
-//                }
-//
-//                @Override
-//                public void remove() {
-//                    throw new UnsupportedOperationException();
-//                }
-//
-//                @Override
-//                public E next() {
-//                    if (hasNext()) {
-//                        E r = nextValue;
-//                        if (r.getX() > until) {
-//                            plusOne = false;
-//                        }
-//                        if (nextNextValue != null) {
-//                            nextValue = nextNextValue;
-//                            nextNextValue = null;
-//                        } else if (org.hasNext()) nextValue = org.next();
-//                        else nextValue = null;
-//                        return r;
-//                    } else {
-//                        throw new NoSuchElementException();
-//                    }
-//                }
-//
-//                @Override
-//                public boolean hasNext() {
-//                    return nextValue != null && (nextValue.getX() <= until || plusOne);
-//                }
-//            };
-//        }
+        } else {
+            return new Iterator<E>() {
+                Iterator<E> org = mData.iterator();
+                E nextValue = null;
+                E nextNextValue = null;
+                boolean plusOne = true;
+
+                {
+                    // go to first
+                    boolean found = false;
+                    E prevValue = null;
+                    if (org.hasNext()) {
+                        prevValue = org.next();
+                    }
+                    if (prevValue != null) {
+                        if (prevValue.getX() >= from) {
+                            nextValue = prevValue;
+                            found = true;
+                        } else {
+                            while (org.hasNext()) {
+                                nextValue = org.next();
+                                if (nextValue.getX() >= from) {
+                                    found = true;
+                                    nextNextValue = nextValue;
+                                    nextValue = prevValue;
+                                    break;
+                                }
+                                prevValue = nextValue;
+                            }
+                        }
+                    }
+                    if (!found) {
+                        nextValue = null;
+                    }
+                }
+
+                @Override
+                public void remove() {
+                    throw new UnsupportedOperationException();
+                }
+
+                @Override
+                public E next() {
+                    if (hasNext()) {
+                        E r = nextValue;
+                        if (r.getX() > until) {
+                            plusOne = false;
+                        }
+                        if (nextNextValue != null) {
+                            nextValue = nextNextValue;
+                            nextNextValue = null;
+                        } else if (org.hasNext()) nextValue = org.next();
+                        else nextValue = null;
+                        return r;
+                    } else {
+                        throw new NoSuchElementException();
+                    }
+                }
+
+                @Override
+                public boolean hasNext() {
+                    return nextValue != null && (nextValue.getX() <= until || plusOne);
+                }
+            };
+        }
     }
 
-    
+
     public String getTitle() {
         return mTitle;
     }
 
-    
+
     public void setTitle(String mTitle) {
         this.mTitle = mTitle;
     }
 
-    
+
     public int getColor() {
         return mColor;
     }
 
-    
+
     public void setColor(int mColor) {
         this.mColor = mColor;
     }
 
-    
+
     public void setOnDataPointTapListener(OnDataPointTapListener l) {
         this.mOnDataPointTapListener = l;
     }
 
-    
+
     @Override
     public void onTap(float x, float y) {
         if (mOnDataPointTapListener != null) {
@@ -208,7 +207,7 @@ public abstract class BaseSeries<E extends DataPointInterface> implements Series
         }
     }
 
-    
+
     protected E findDataPoint(float x, float y) {
         float shortestDistance = Float.NaN;
         E shortest = null;
@@ -218,7 +217,7 @@ public abstract class BaseSeries<E extends DataPointInterface> implements Series
             float x2 = x;
             float y2 = y;
 
-            float distance = (float) Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
+            float distance = (float) Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
             if (shortest == null || distance < shortestDistance) {
                 shortestDistance = distance;
                 shortest = entry.getValue();
@@ -253,7 +252,7 @@ public abstract class BaseSeries<E extends DataPointInterface> implements Series
         return null;
     }
 
-    
+
     protected void registerDataPoint(float x, float y, E dp) {
         // performance
         // TODO maybe invalidate after setting the listener
@@ -261,12 +260,12 @@ public abstract class BaseSeries<E extends DataPointInterface> implements Series
             mDataPoints.put(new PointF(x, y), dp);
         }
     }
-    
+
     protected void resetDataPoints() {
         mDataPoints.clear();
     }
 
-    
+
     public void resetData(E[] data) {
         mData.clear();
         for (E d : data) {
@@ -284,17 +283,17 @@ public abstract class BaseSeries<E extends DataPointInterface> implements Series
         }
     }
 
-    
+
     @Override
     public void onGraphViewAttached(GraphView graphView) {
         mGraphViews.add(new WeakReference<>(graphView));
     }
 
-    
+
     public void appendData(E dataPoint, boolean scrollToEnd, int maxDataPoints, boolean silent) {
         checkValueOrder(dataPoint);
 
-        if (!mData.isEmpty() && dataPoint.getX() < mData.get(mData.size()-1).getX()) {
+        if (!mData.isEmpty() && dataPoint.getX() < mData.get(mData.size() - 1).getX()) {
             throw new IllegalArgumentException("new x-value must be greater then the last value. x-values has to be ordered in ASC.");
         }
         synchronized (mData) {
@@ -341,23 +340,23 @@ public abstract class BaseSeries<E extends DataPointInterface> implements Series
         }
     }
 
-    
+
     public void appendData(E dataPoint, boolean scrollToEnd, int maxDataPoints) {
         appendData(dataPoint, scrollToEnd, maxDataPoints, false);
     }
 
-    
+
     @Override
     public boolean isEmpty() {
         return mData.isEmpty();
     }
 
-    
+
     protected void checkValueOrder(DataPointInterface onlyLast) {
-        if (mData.size()>1) {
+        if (mData.size() > 1) {
             if (onlyLast != null) {
                 // only check last
-                if (onlyLast.getX() < mData.get(mData.size()-1).getX()) {
+                if (onlyLast.getX() < mData.get(mData.size() - 1).getX()) {
                     throw new IllegalArgumentException("new x-value must be greater then the last value. x-values has to be ordered in ASC.");
                 }
             } else {
