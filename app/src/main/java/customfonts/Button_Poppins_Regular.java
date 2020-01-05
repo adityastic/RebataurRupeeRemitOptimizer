@@ -3,10 +3,11 @@ package customfonts;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.widget.Button;
+
+import androidx.appcompat.widget.AppCompatButton;
 
 
-public class Button_Poppins_Regular extends Button {
+public class Button_Poppins_Regular extends AppCompatButton {
 
     public Button_Poppins_Regular(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);

@@ -1,6 +1,7 @@
 
 package com.rebataur.forexapp.views.graph;
 
+import android.annotation.SuppressLint;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -193,6 +194,7 @@ public class GridLabelRenderer {
     }
 
     
+    @SuppressLint("ResourceType")
     public void resetStyles() {
         // get matching styles from theme
         TypedValue typedValue = new TypedValue();
