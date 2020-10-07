@@ -36,8 +36,8 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
 
     // Firebase Cloud Messaging
-    implementation 'com.google.firebase:firebase-core:17.5.0'
-    implementation 'com.google.firebase:firebase-core:17.5.0'
+    implementation 'com.google.firebase:firebase-core:17.5.1'
+    implementation 'com.google.firebase:firebase-core:17.5.1'
     implementation 'com.google.firebase:firebase-messaging:20.3.0'
 
     // Show/Hide View
