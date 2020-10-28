@@ -38,7 +38,7 @@ dependencies {
     // Firebase Cloud Messaging
     implementation 'com.google.firebase:firebase-core:18.0.0'
     implementation 'com.google.firebase:firebase-core:18.0.0'
-    implementation 'com.google.firebase:firebase-messaging:20.3.0'
+    implementation 'com.google.firebase:firebase-messaging:21.0.0'
 
     // Show/Hide View
     implementation 'com.github.scottyab:showhidepasswordedittext:0.8'
