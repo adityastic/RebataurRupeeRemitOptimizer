@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationManagerCompat;
-import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.rebataur.forexapp.data.GraphPlotData;
 import com.rebataur.forexapp.firebasemessaging.MyFirebaseMessagingService;
 import com.rebataur.forexapp.utils.AjaxCall;
@@ -404,7 +404,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void createFirebaseMessagingInit() {
-        String token = FirebaseInstanceId.getInstance().getToken();
+        String token = FirebaseMessaging.getInstance().getToken().getResult();
         Log.e("Token", "Token: " + token);
 
         AjaxCall.storeFCMToken(token, new AjaxCall.APICallback() {
